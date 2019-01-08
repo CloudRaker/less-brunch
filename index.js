@@ -31,6 +31,7 @@ const formatError = path => err => {
 class LESSCompiler {
   constructor(config) {
     this.config = config.plugins.less || {};
+    this.config.options = this.config.options || {};
     this.rootPath = config.paths.root;
     this.optimize = config.optimize;
 
@@ -72,7 +73,7 @@ class LESSCompiler {
     const data = file.data;
     const path = file.path;
     const paths = [this.rootPath, sysPath.dirname(path)]
-          .concat(this.config.options.includePaths);
+      .concat(this.config.options.includePaths);
     const config = Object.assign({}, this.config, {
       paths: paths,
       filename: path,
